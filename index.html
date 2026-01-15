@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>APEX | Computer Science Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #0a1822;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    header {
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 2rem;
+    }
+
+    nav ul li a {
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #a0e4ff;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      margin-right: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      height: 100vh;
+      background-image: linear-gradient(to bottom, rgba(10, 24, 34, 0.3), rgba(10, 24, 34, 0.9)), url("images/christopher-gower-m_HRfLhgABo-unsplash.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin-top: -5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: #a0e4ff;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .section {
+      padding: 6rem 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .section:nth-child(odd) {
+      background-color: #0f2336;
+    }
+
+    .section-number {
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(160, 228, 255, 0.2);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: #a0e4ff;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-text {
+      margin-bottom: 2rem;
+      color: #dfdfdf;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      background-color: #a0e4ff;
+      color: #0a1822;
+      font-weight: 600;
+      border-radius: 4px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #7bcdf8;
+      transform: translateY(-3px);
+    }
+
+    .section-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .quiz-box {
+      background-color: rgba(15, 35, 54, 0.9);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-top: 2rem;
+    }
+
+    .quiz-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .quiz-text {
+      color: #dfdfdf;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .quiz-option {
+      padding: 1rem;
+      border: 1px solid rgba(160, 228, 255, 0.3);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+      background-color: rgba(160, 228, 255, 0.1);
+      border-color: #a0e4ff;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      background-color: #0a1822;
+      padding: 5rem 5%;
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(160, 228, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      color: #a0e4ff;
+    }
+
+    .contact-form-wrapper {
+      background: #0f2336;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #a0e4ff;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      background: #0a1822;
+      border: 1px solid rgba(160, 228, 255, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus {
+      border-color: #a0e4ff;
+    }
+
+    footer {
+      padding: 3rem 5%;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: #0a1822;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 968px) {
+      .section, .contact-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .contact-container {
+        padding-top: 2rem;
+      }
+      .hero-title {
+        font-size: 3rem;
+      }
+      .section-image {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+      .contact-form-wrapper {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">NAJI AC</div>
+    <nav>
+      <ul>
+        <li><a href="#">Topics</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="search-icon">
+        🔍
+      </div>
+      <a href="#" class="btn">Sign Up</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-subtitle">Your Ultimate Guide</div>
+      <h1 class="hero-title">Explore the World of Computer Science!</h1>
+    </div>
+  </section>
+
+  <!-- Section 1: Skill Level -->
+  <section class="section">
+    <div class="section-content">
+      <div class="section-number">01</div>
+      <div class="section-subtitle">Know Your Skill Level</div>
+      <h2 class="section-title">Where do you stand in Computer Science?</h2>
+      <p class="section-text">Whether you're a beginner learning how computers work or an experienced developer working with AI and cybersecurity, knowing your skill level helps guide your learning journey in Computer Science.</p>
+      <div class="quiz-box">
+        <h3 class="quiz-title">Quick Assessment</h3>
+        <p class="quiz-text">Select the option that best describes your current experience:</p>
+        <div class="quiz-options">
+          <div class="quiz-option">Beginner (Just started learning)</div>
+          <div class="quiz-option">Intermediate (Basic coding & concepts)</div>
+          <div class="quiz-option">Advanced (Projects & problem-solving)</div>
+          <div class="quiz-option">Expert (Specialized in a field)</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-image">
+      <img src="images/wmremove-transformed.avif" alt="Computer Science student coding">
+    </div>
+  </section>
+
+  <!-- Section 2: Tools -->
+  <section class="section">
+    <div class="section-image">
+      <img src="images/wmremove-transformed (2).avif" alt="Laptop and programming tools">
+    </div>
+    <div class="section-content">
+      <div class="section-number">02</div>
+      <div class="section-subtitle">Learning Tools</div>
+      <h2 class="section-title">Choose the Right Tools & Languages</h2>
+      <p class="section-text">From Python and JavaScript to version control systems like Git, the right tools make learning and developing in CS much easier. We'll help you get started with the best ones for your level.</p>
+      <a href="#" class="btn">Explore Tools</a>
+    </div>
+  </section>
+
+  <!-- Section 3: Career Path -->
+  <section class="section">
+    <div class="section-content">
+      <div class="section-number">03</div>
+      <div class="section-subtitle">Your Future</div>
+      <h2 class="section-title">Build a Career in Tech</h2>
+      <p class="section-text">Computer Science opens doors to exciting careers in AI, Data Science, Web Development, Cybersecurity, and more. Learn how to shape your future with real-world skills and certifications.</p>
+      <a href="#" class="btn">See Career Paths</a>
+    </div>
+    <div class="section-image">
+      <img src="images/christopher-gower-m_HRfLhgABo-unsplash.jpg" alt="Team working on tech project">
+    </div>
+  </section>
+   <section id="contact" class="contact-container">
+    <div class="contact-info">
+      <div class="section-subtitle">Get In Touch</div>
+      <h2 class="section-title">Let's Talk Tech</h2>
+      <p class="section-text">Have questions about our curriculum or need career advice? Reach out to our team of experts and we'll get back to you within 24 hours.</p>
+      
+      <div class="contact-method">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div style="font-weight: 600;">Email Us</div>
+          <div style="color: #dfdfdf;">hello@naji-ac.tech</div>
+        </div>
+      </div>
+      
+      <div class="contact-method">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div style="font-weight: 600;">Headquarters</div>
+          <div style="color: #dfdfdf;">Silicon Valley, CA 94025</div>
+        </div>
+      </div>
+
+      <div class="contact-method">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div style="font-weight: 600;">Socials</div>
+          <div style="color: #a0e4ff; margin-top: 0.5rem;">
+            <a href="#" style="margin-right: 15px;">Twitter</a>
+            <a href="#" style="margin-right: 15px;">LinkedIn</a>
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrapper">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="Career Guidance" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.quiz-option').forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.borderColor = 'rgba(160, 228, 255, 0.3)';
+          });
+          this.style.backgroundColor = 'rgba(160, 228, 255, 0.2)';
+          this.style.borderColor = '#a0e4ff';
+        });
+      });
+
+      window.addEventListener('scroll', function () {
+        const scroll = window.pageYOffset;
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+          heroContent.style.transform = `translateY(${scroll * 0.4}px)`;
+          heroContent.style.opacity = 1 - (scroll * 0.003);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
